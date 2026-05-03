@@ -1,12 +1,12 @@
 # Switch-from-Windows-to-Arch-Linux
 
-# Overview
+## Overview
 
 Switching from Windows to Arch Linux. The goal is to gain deeper technical knowledge of system operations, achieve greater control over the operating system, and build a minimal, efficient system from the ground up.
 
-## Why Arch Linux?
+### Why Arch Linux?
 
-### Advantages
+#### Advantages
 
 - Packages are available to Arch users before most other distributions.
 - Rolling release model no version numbers, each component updates independently.
