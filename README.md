@@ -539,7 +539,7 @@ Reboots into the new Arch Linux installation.
 
 ---
 
-- Post-Installation Setup
+### Post-Installation Setup
 
 #### Initial Checks
 
