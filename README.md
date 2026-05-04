@@ -1,24 +1,18 @@
-# Switch-from-Windows-to-Arch-Linux
+## Why Arch Linux?
 
-## Overview
-
-Switching from Windows to Arch Linux. The goal is to gain deeper technical knowledge of system operations, achieve greater control over the operating system, and build a minimal, efficient system from the ground up.
-
-### Why Arch Linux?
-
-#### Advantages
+### Advantages
 
 - Packages are available to Arch users before most other distributions.
 - Rolling release model no version numbers, each component updates independently.
 - Access to the **Arch User Repository (AUR)**, one of the largest community driven package repositories.
 - Light weight and minimal by design.
 
-#### Disadvantages
+### Disadvantages
 
 - Highly technical and user dependent, requires solid technical knowledge to utilize the system's full potential.
 - Not beginner friendly or user friendly.
 
-### Setup
+## Setup
 
 - A device compatible with Arch Linux
 - A portable USB drive (for file backup and bootable media)
@@ -27,9 +21,9 @@ Switching from Windows to Arch Linux. The goal is to gain deeper technical knowl
 
 ---
 
-### Steps
+## Steps
 
-#### Things to check before installation
+### Things to check before installation
 
 1. Verify hardware compatibility with Arch Linux.
 2. Back up current HDD/SSD and transfer important files to a portable USB drive.
@@ -37,7 +31,7 @@ Switching from Windows to Arch Linux. The goal is to gain deeper technical knowl
 
 ---
 
-#### Preparing the Installation Media
+### Preparing the Installation Media
 
 1. Download the latest Arch Linux ISO from https://archlinux.org/.
 2. Download and install USBImager from https://gitlab.com/bztsrc/usbimager.
@@ -46,7 +40,7 @@ Switching from Windows to Arch Linux. The goal is to gain deeper technical knowl
 
 ---
 
-#### Post Boot: Connecting to WiFi
+### Post Boot: Connecting to WiFi
 
 Once booted into the Arch Linux live environment, establish a network connection.
 
@@ -76,7 +70,7 @@ Connects to the specified WiFi network using the provided password.
 
 ---
 
-#### I’ve chosen the manual installation method in this process
+### I’ve chosen the manual installation method in this process
 
 - Partitioning the Disks
 
@@ -91,7 +85,7 @@ Lists all storage volumes attached to the device. I’ve got one HDD and one SSD
 
 ---
 
-#### Partition the SSD
+### Partition the SSD
 
 ```bash
 fdisk /dev/SSDNAME
@@ -224,8 +218,7 @@ Encrypts the third SSD partition (Linux LVM) using LUKS encryption.
 cryptsetup open --type luks /dev/SSDNAMEp3 lvm
 ```
 
-> Opens the encrypted partition and maps it for LVM use.
-> 
+Opens the encrypted partition and maps it for LVM use. 
 
 ```bash
 pvcreate /dev/mapper/lvm
@@ -249,8 +242,7 @@ Creates a 30GB logical volume for the root filesystem.
 vgdisplay
 ```
 
-> Displays information about the volume groups. Verify `volgroup0` appears correctly.
-> 
+Displays information about the volume groups. Verify `volgroup0` appears correctly. 
 
 ```bash
 lvdisplay
@@ -274,8 +266,7 @@ Scans for all volume groups.
 vgchange -ay
 ```
 
-> Activates all volume groups.
-> 
+Activates all volume groups. 
 
 ```bash
 mkfs.ext4 /dev/volgroup0/lv_root
@@ -411,8 +402,7 @@ Enables the SSH daemon to start on boot.
 pacman -S linux linux-headers linux-lts linux-lts-headers
 ```
 
-> Installs the latest Linux kernel and the LTS kernel along with their headers.
-> 
+Installs the latest Linux kernel and the LTS kernel along with their headers. 
 
 ```bash
 pacman -S linux-firmware
@@ -477,8 +467,7 @@ Uncomment `en_US.UTF-8 UTF-8` to set the system locale.
 locale-gen
 ```
 
-> Generates the selected locale.
-> 
+Generates the selected locale. 
 
 ```bash
 nano /etc/default/grub
@@ -554,7 +543,7 @@ sudo pacman -Syu
 
 Performs a full system update. 
 
-### Enabling Multilib Repository
+## Enabling Multilib Repository
 
 ```bash
 sudo nano /etc/pacman.conf
@@ -571,7 +560,7 @@ sudo pacman -Syu
 
 Updates the system again after enabling the multilib repository.
 
-### Installing Microcode Updates
+## Installing Microcode Updates
 
 ```bash
 sudo pacman -S amd-ucode
@@ -579,7 +568,7 @@ sudo pacman -S amd-ucode
 
 Installs AMD CPU microcode updates. Replace with `intel-ucode` for Intel processors. 
 
-#### Enabling Bash Completion
+### Enabling Bash Completion
 
 ```bash
 sudo pacman -S bash-completion
@@ -598,7 +587,7 @@ source ~/.bashrc
 
 Reloads the `.bashrc` file to apply changes. 
 
-#### Installing Common Applications
+### Installing Common Applications
 
 ```bash
 sudo pacman -S firefox libreoffice-fresh vlc
@@ -606,7 +595,7 @@ sudo pacman -S firefox libreoffice-fresh vlc
 
 Installs Firefox browser, LibreOffice suite, and VLC media player. 
 
-#### Installing YAY (AUR Helper)
+### Installing YAY (AUR Helper)
 
 ```bash
 sudo pacman -S git base-devel
@@ -623,7 +612,7 @@ yay -S pacman-aur
 
 Install the AUR extension. Go to preferences, enable AUR support and check for updates. 
 
-#### Enabling SSD TRIM
+### Enabling SSD TRIM
 
 ```bash
 sudo systemctl enable fstrim.timer
@@ -633,7 +622,7 @@ systemctl status fstrim.timer
 
 Enables and starts the periodic TRIM service for SSD health maintenance. 
 
-#### Optimizing Mirrors with Reflector
+### Optimizing Mirrors with Reflector
 
 ```bash
 sudo pacman -S reflector rsync
@@ -642,7 +631,7 @@ sudo reflector --latest 10 --sort rate --fastest 5 --save /etc/pacman.d/mirrorli
 
 Fetches and ranks the 10 most recently updated mirrors, selects the 5 fastest, and saves them as the active mirrorlist. 
 
-#### Setting Up the Firewall (UFW)
+### Setting Up the Firewall (UFW)
 
 ```bash
 sudo pacman -S ufw
@@ -653,7 +642,7 @@ sudo systemctl enable ufw.service
 
 Installs, enables, and configures UFW (Uncomplicated Firewall) to start on boot. 
 
-#### Setting Up System Snapshots with Timeshift
+### Setting Up System Snapshots with Timeshift
 
 ```bash
 yay -Sy timeshift
@@ -663,14 +652,14 @@ Installs Timeshift for creating and managing system snapshots, useful for rollba
 
 ---
 
-### Results
+## Results
 
 - Successfully switched from Windows to Arch Linux.
 - Configured full disk encryption using LUKS and LVM.
 - Set up a fully functional GNOME desktop environment.
 - Established AUR access, system snapshots, firewall rules, and optimized mirrors.
 
-### Key Learnings
+## Key Learnings
 
 - In depth understanding of Linux disk partitioning, LVM, and LUKS encryption.
 - How the Linux boot process works from initramfs to GRUB configuration.
@@ -678,7 +667,7 @@ Installs Timeshift for creating and managing system snapshots, useful for rollba
 - Importance of system security practices such as disk encryption and firewall configuration.
 - How rolling release distributions differ from versioned distributions.
 
-### References
+## References
 
 - [Arch Linux Official Website](https://archlinux.org/)
 - [Arch Wiki](https://wiki.archlinux.org/)
